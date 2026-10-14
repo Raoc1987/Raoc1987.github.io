@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rodrigo Costa — Full-Stack Engineer, Backend & Data Integrity</title>
+<meta name="description" content="Mechanical engineer turned software builder. Full-stack engineer focused on backend, Postgres and data integrity. Builder of ALKMIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230B5F59'/><path d='M3 22 L9 22 L11 6 L13 22 L18 22 L19.5 15 L21 22 L29 22' fill='none' stroke='white' stroke-width='2.4' stroke-linejoin='round'/></svg>">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#EEF1EF; --surface:#F8FAF9; --ink:#182024; --steel:#56636A;
+  --rule:#C7CFCB; --signal:#0B5F59; --flaw:#B26A0A;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){color-scheme:dark;
+    --paper:#141A1D; --surface:#1B2226; --ink:#E3E8E5; --steel:#98A5AB;
+    --rule:#2E383D; --signal:#4FB8AC; --flaw:#E3A24A;}
+}
+:root[data-theme="dark"]{color-scheme:dark;
+  --paper:#141A1D; --surface:#1B2226; --ink:#E3E8E5; --steel:#98A5AB;
+  --rule:#2E383D; --signal:#4FB8AC; --flaw:#E3A24A;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:1.0625rem;line-height:1.6;font-variation-settings:"wdth" 100;-webkit-font-smoothing:antialiased}
+html[data-lang="en"] [data-l="pt"], html[data-lang="pt"] [data-l="en"]{display:none!important}
+a{color:var(--signal);text-underline-offset:.2em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+code{font-family:var(--mono);font-size:.88em;background:var(--surface);border:1px solid var(--rule);
+  padding:.05em .35em;border-radius:3px}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0;font-size:.9rem;color:var(--steel)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.85rem;background:none;color:var(--steel);border:0;padding:.3rem .8rem;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding:3.5rem 0 2.5rem}
+.hero h1{font-size:clamp(2.6rem,7vw,4.4rem);line-height:.98;margin:0;font-weight:780;
+  font-variation-settings:"wdth" 118;letter-spacing:-.01em}
+.role{font-size:1.2rem;margin:1rem 0 0;font-variation-settings:"wdth" 108;font-weight:520}
+.thesis{font-size:1.35rem;line-height:1.4;margin:1.75rem 0 0;max-width:34rem;color:var(--steel)}
+.scan{margin:2.75rem 0 0;border-top:1px solid var(--rule);padding:1rem 0 0}
+.scan svg{display:block;width:100%;height:auto;overflow:visible}
+.scan .trace{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linejoin:round}
+.scan .gate{fill:var(--flaw);opacity:.12}
+.scan .gate-line{stroke:var(--flaw);stroke-width:1.5}
+.scan text{font-family:var(--sans);font-size:11px;fill:var(--steel)}
+.scan text.f{fill:var(--flaw);font-weight:600}
+.scan figcaption{font-size:.88rem;color:var(--steel);margin-top:.6rem}
+@media (prefers-reduced-motion:no-preference){
+  .scan .trace{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.2s cubic-bezier(.45,.05,.3,1) .3s forwards}
+  .scan .gate,.scan .gate-line,.scan text.f{opacity:0;animation:show .5s ease 2.1s forwards}
+  .scan .gate{animation-name:showg}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes show{to{opacity:1}}
+@keyframes showg{to{opacity:.12}}
+
+/* sections */
+section{padding:3rem 0;border-top:1px solid var(--rule)}
+h2{font-size:1.9rem;line-height:1.1;margin:0 0 1rem;font-weight:760;font-variation-settings:"wdth" 112}
+h3{font-size:1.2rem;margin:2rem 0 .5rem;font-weight:700;font-variation-settings:"wdth" 104}
+p{margin:.75rem 0;max-width:40rem}
+.lead{font-size:1.15rem}
+.meta{color:var(--steel);font-size:.95rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin:1.5rem 0;border-radius:4px;overflow:hidden}
+.facts div{background:var(--surface);padding:.9rem 1rem;font-size:.95rem}
+.facts b{display:block;font-size:1.05rem;font-variation-settings:"wdth" 108}
+
+/* findings = defect reports */
+.finding{border-left:3px solid var(--flaw);padding:.25rem 0 .25rem 1.25rem;margin:2rem 0}
+.finding h4{margin:0 0 .5rem;font-size:1.15rem;font-weight:720}
+.finding dl{margin:0;display:grid;grid-template-columns:7.5rem 1fr;gap:.35rem 1rem}
+.finding dt{color:var(--steel);font-size:.92rem;padding-top:.08rem}
+.finding dd{margin:0}
+@media (max-width:540px){.finding dl{grid-template-columns:1fr}.finding dt{padding-top:.5rem}}
+
+.rules{padding:0;margin:1rem 0;list-style:none}
+.rules li{padding:.75rem 0;border-bottom:1px solid var(--rule)}
+.rules li:last-child{border-bottom:0}
+.rules b{font-weight:680}
+
+.proj{margin:2rem 0}
+.proj h3{margin-bottom:.25rem}
+.links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:.5rem 0 0;font-size:.95rem}
+
+.stack{display:grid;grid-template-columns:9rem 1fr;gap:.6rem 1rem;margin:1rem 0}
+.stack dt{font-weight:650}
+.stack dd{margin:0;color:var(--steel)}
+@media (max-width:540px){.stack{grid-template-columns:1fr;gap:.15rem}.stack dd{margin-bottom:.6rem}}
+
+.timeline{list-style:none;padding:0;margin:1rem 0}
+.timeline li{display:grid;grid-template-columns:7.5rem 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--rule)}
+.timeline span{color:var(--steel);font-variant-numeric:tabular-nums}
+@media (max-width:540px){.timeline li{grid-template-columns:1fr;gap:.1rem}}
+
+footer{padding:3rem 0 4rem;border-top:1px solid var(--rule)}
+.contact{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.contact a{border:1px solid var(--ink);color:var(--ink);text-decoration:none;padding:.55rem 1rem;border-radius:4px;font-weight:600}
+.contact a.primary{background:var(--ink);color:var(--paper)}
+.contact a:hover{border-color:var(--signal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="bar">
+  <span>Rodrigo Costa</span>
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" data-set="en" aria-pressed="true">EN</button>
+    <button type="button" data-set="pt" aria-pressed="false">PT</button>
+  </div>
+</div>
+
+<header class="hero">
+  <h1>Rodrigo<br>Costa</h1>
+  <p class="role">
+    <span data-l="en">Full-stack engineer, focused on backend and data integrity</span>
+    <span data-l="pt">Engenheiro full-stack, com foco em backend e integridade de dados</span>
+  </p>
+  <p class="thesis">
+    <span data-l="en">Mechanical engineer turned software builder. I build systems that can prove they work.</span>
+    <span data-l="pt">Engenheiro mecânico que passou a construir software. Construo sistemas que conseguem provar que funcionam.</span>
+  </p>
+
+  <figure class="scan">
+    <svg viewBox="0 0 600 124" role="img" aria-labelledby="scan-t">
+      <title id="scan-t">Ultrasonic A-scan: initial pulse, a small flaw echo, and the back wall.</title>
+      <rect class="gate" x="300" y="8" width="36" height="96"/>
+      <line class="gate-line" x1="300" y1="8" x2="336" y2="8"/>
+      <path class="trace" d="M0,95.4 L3,94.9 L6,96.5 L9,94.6 L12,96.1 L15,95.5 L18,94.2 L21,94.0 L24,87.6 L27,80.2 L30,73.1 L33,82.6 L36,78.9 L39,49.2 L42,37.4 L45,52.5 L48,75.7 L51,91.2 L54,95.4 L57,95.5 L60,97.4 L63,94.5 L66,97.1 L69,95.3 L72,94.9 L75,94.8 L78,95.4 L81,97.0 L84,95.0 L87,96.3 L90,96.4 L93,95.6 L96,96.2 L99,94.6 L102,94.6 L105,95.1 L108,96.6 L111,95.8 L114,95.4 L117,96.3 L120,95.9 L123,95.4 L126,96.9 L129,96.6 L132,95.2 L135,96.2 L138,96.1 L141,97.2 L144,96.7 L147,95.3 L150,97.5 L153,94.8 L156,95.7 L159,96.8 L162,94.9 L165,96.0 L168,94.5 L171,96.5 L174,96.8 L177,96.2 L180,97.2 L183,95.4 L186,96.6 L189,96.3 L192,96.3 L195,95.9 L198,97.1 L201,97.4 L204,95.9 L207,96.5 L210,94.6 L213,96.6 L216,96.5 L219,97.6 L222,97.0 L225,95.3 L228,95.6 L231,96.5 L234,94.5 L237,95.9 L240,94.9 L243,94.8 L246,94.6 L249,96.9 L252,94.8 L255,95.2 L258,95.7 L261,97.2 L264,94.7 L267,95.8 L270,96.2 L273,97.2 L276,97.0 L279,97.2 L282,95.3 L285,95.7 L288,95.5 L291,97.2 L294,97.5 L297,94.9 L300,95.0 L303,95.1 L306,95.0 L309,94.9 L312,86.9 L315,67.1 L318,54.4 L321,67.6 L324,86.2 L327,95.2 L330,97.3 L333,96.6 L336,96.0 L339,96.4 L342,96.6 L345,94.6 L348,97.3 L351,96.9 L354,97.2 L357,97.0 L360,95.7 L363,95.7 L366,94.7 L369,96.4 L372,94.6 L375,94.6 L378,95.1 L381,94.9 L384,95.5 L387,94.6 L390,94.4 L393,94.9 L396,94.7 L399,95.6 L402,94.5 L405,97.2 L408,96.4 L411,94.9 L414,95.2 L417,95.5 L420,95.6 L423,94.8 L426,97.1 L429,97.6 L432,95.9 L435,95.9 L438,94.7 L441,94.7 L444,95.5 L447,95.2 L450,97.1 L453,94.9 L456,94.5 L459,97.4 L462,96.1 L465,94.9 L468,96.1 L471,94.5 L474,96.1 L477,97.5 L480,97.2 L483,96.6 L486,95.2 L489,95.6 L492,94.9 L495,96.9 L498,96.1 L501,96.9 L504,95.5 L507,95.1 L510,97.0 L513,97.6 L516,97.1 L519,96.9 L522,96.7 L525,95.7 L528,93.9 L531,91.8 L534,73.1 L537,45.8 L540,32.5 L543,46.6 L546,72.8 L549,92.4 L552,96.2 L555,94.7 L558,97.1 L561,97.5 L564,97.4 L567,95.6 L570,95.1 L573,95.1 L576,95.0 L579,95.1 L582,96.4 L585,97.3 L588,97.1 L591,95.9 L594,96.5 L597,97.0 L600,94.7"/>
+      <text x="22" y="120">pulse</text>
+      <text class="f" x="292" y="120">flaw</text>
+      <text x="516" y="120">back wall</text>
+    </svg>
+    <figcaption>
+      <span data-l="en">An ultrasonic scan. I used to read these in industrial quality inspection: the surface looks fine, the defect is underneath. I look for the same thing in software.</span>
+      <span data-l="pt">Um ensaio por ultrassom. Lia estes sinais na inspeção de qualidade industrial: a superfície parece bem, o defeito está por baixo. Procuro a mesma coisa em software.</span>
+    </figcaption>
+  </figure>
+</header>
+
+<main>
+
+<section id="about">
+  <h2><span data-l="en">About</span><span data-l="pt">Sobre</span></h2>
+  <div data-l="en">
+    <p class="lead">I have a degree in Mechanical Engineering and years of work in industry, in Brazil and Portugal. Today I build full-stack products, mostly in TypeScript, Next.js and PostgreSQL.</p>
+    <p>My main interest is software that people can trust: correct data, clear rules, and failures that are visible. The hardest bugs are not the ones that crash. They are the ones that look like they work.</p>
+  </div>
+  <div data-l="pt">
+    <p class="lead">Sou formado em Engenharia Mecânica e trabalhei vários anos na indústria, no Brasil e em Portugal. Hoje construo produtos full-stack, sobretudo em TypeScript, Next.js e PostgreSQL.</p>
+    <p>O que mais me interessa é software em que as pessoas possam confiar: dados corretos, regras claras e falhas visíveis. Os bugs mais difíceis não são os que rebentam. São os que parecem funcionar.</p>
+  </div>
+</section>
+
+<section id="alkmia">
+  <h2>ALKMIA</h2>
+  <p class="meta">
+    <span data-l="en">Training platform with an adaptive periodization engine. Solo project, live. Private code — this is a case study.</span>
+    <span data-l="pt">Plataforma de treino com um motor de periodização adaptativo. Projeto individual, em produção. Código privado — isto é um caso de estudo.</span>
+  </p>
+
+  <div data-l="en">
+    <p class="lead">An athlete logs every set. The app builds a training program, follows how it is executed, and adjusts the next weeks to what was really done.</p>
+    <p>The central decision: <b>AI chooses which exercises. The engine decides how much.</b> Sets, reps, load, progression and deload are calculated by a deterministic engine — reproducible and auditable. The language model (Claude) only selects exercises, and its answer is validated before use. No athlete plan depends on the model being right.</p>
+  </div>
+  <div data-l="pt">
+    <p class="lead">O atleta regista cada série. A app cria um programa de treino, acompanha a sua execução e ajusta as semanas seguintes ao que foi realmente feito.</p>
+    <p>A decisão central: <b>a IA escolhe quais exercícios. O motor decide quanto.</b> Séries, repetições, carga, progressão e deload são calculados por um motor determinístico — reprodutível e auditável. O modelo de linguagem (Claude) só escolhe exercícios, e a resposta é validada antes de ser usada. Nenhum plano depende de o modelo acertar.</p>
+  </div>
+
+  <div class="facts">
+    <div><b>32 / 32</b><span data-l="en">tables with row-level security and at least one policy</span><span data-l="pt">tabelas com row-level security e pelo menos uma política</span></div>
+    <div><b>35</b><span data-l="en">versioned database migrations</span><span data-l="pt">migrações de base de dados versionadas</span></div>
+    <div><b><span data-l="en">3,942</span><span data-l="pt">3942</span></b><span data-l="en">configurations in the engine's property test</span><span data-l="pt">configurações no teste de propriedades do motor</span></div>
+  </div>
+
+  <h3><span data-l="en">How it is built</span><span data-l="pt">Como está construído</span></h3>
+  <div data-l="en">
+    <p><b>Immutable history.</b> Programs are versioned. Regenerating creates a new version and never deletes the past. The app never writes a value the athlete did not record: an empty field is the truth, an estimated value is fiction.</p>
+    <p><b>Security in the database.</b> Every row belongs to its owner, and PostgreSQL enforces it, not the application code. An integration test runs the real migrations and fails if any table loses its security policy.</p>
+    <p><b>Learning from what was done.</b> Volume limits for each muscle group (MEV, MAV, MRV) are recalculated from executed volume, never from prescribed volume. Learning from your own prescription is a closed loop.</p>
+    <p><b>Atomic changes.</b> A new program version is saved by one transactional database function. If any step fails, nothing is saved.</p>
+  </div>
+  <div data-l="pt">
+    <p><b>Histórico imutável.</b> Os programas são versionados. Regenerar cria uma versão nova e nunca apaga o passado. A app nunca grava um valor que o atleta não registou: um campo vazio é a verdade, um valor estimado é ficção.</p>
+    <p><b>Segurança na base de dados.</b> Cada linha pertence ao seu dono, e quem o impõe é o PostgreSQL, não o código da aplicação. Um teste de integração corre as migrações reais e falha se alguma tabela perder a sua política de segurança.</p>
+    <p><b>Aprender com o que foi feito.</b> Os limites de volume de cada grupo muscular (MEV, MAV, MRV) são recalculados a partir do volume executado, nunca do prescrito. Aprender com a própria prescrição é um circuito fechado.</p>
+    <p><b>Alterações atómicas.</b> Uma nova versão do programa é gravada por uma única função transacional na base de dados. Se algum passo falhar, nada é gravado.</p>
+  </div>
+
+  <h3><span data-l="en">Three defects I found</span><span data-l="pt">Três defeitos que encontrei</span></h3>
+  <p><span data-l="en">None of them crashed. All of them looked correct.</span><span data-l="pt">Nenhum rebentava. Todos pareciam corretos.</span></p>
+
+  <article class="finding">
+    <h4><span data-l="en">The learning that learned nothing</span><span data-l="pt">A aprendizagem que não aprendia</span></h4>
+    <dl data-l="en">
+      <dt>Symptom</dt><dd>None. The database column was filled, the audit log had a row, and the screen said "your limits were adjusted".</dd>
+      <dt>Reality</dt><dd>The writer saved keys like <code>peito</code>. The engine read <code>Peito</code>. The new values were never used.</dd>
+      <dt>Fix</dt><dd>Moved the logic into a pure, testable function. Added a test over every muscle group: each key must map to a label the engine reads.</dd>
+      <dt>Lesson</dt><dd>Three positive signals can point to a false conclusion. Found by audit, before real users depended on it.</dd>
+    </dl>
+    <dl data-l="pt">
+      <dt>Sintoma</dt><dd>Nenhum. A coluna estava preenchida, o registo de auditoria tinha uma linha e o ecrã dizia "os teus limites foram ajustados".</dd>
+      <dt>Realidade</dt><dd>Quem escrevia gravava chaves como <code>peito</code>. O motor lia <code>Peito</code>. Os valores novos nunca eram usados.</dd>
+      <dt>Correção</dt><dd>Passei a lógica para uma função pura e testável. Acrescentei um teste sobre todos os grupos musculares: cada chave tem de corresponder a um rótulo que o motor lê.</dd>
+      <dt>Lição</dt><dd>Três sinais positivos podem apontar para uma conclusão falsa. Encontrado por auditoria, antes de utilizadores reais dependerem disso.</dd>
+    </dl>
+  </article>
+
+  <article class="finding">
+    <h4><span data-l="en">One more training day made the plan worse</span><span data-l="pt">Mais um dia de treino piorava o plano</span></h4>
+    <dl data-l="en">
+      <dt>Symptom</dt><dd>A generic warning: "some groups are below minimum volume".</dd>
+      <dt>Reality</dt><dd>The weekly split repeated a 3-day cycle with <code>i % 3</code>. With 5 days it was cut in the middle: legs once per week, at 42% of the minimum effective volume. With 4 or 6 days, legs got two sessions.</dd>
+      <dt>Fix</dt><dd>An explicit table per number of days, plus a rule tested for 1 to 7 days: every large muscle group is trained at least twice a week when possible.</dd>
+      <dt>Lesson</dt><dd>A warning that treats an 8% gap and a 58% gap the same is noise, not a warning.</dd>
+    </dl>
+    <dl data-l="pt">
+      <dt>Sintoma</dt><dd>Um aviso genérico: "alguns grupos estão abaixo do volume mínimo".</dd>
+      <dt>Realidade</dt><dd>A divisão semanal repetia um ciclo de 3 dias com <code>i % 3</code>. Com 5 dias era cortado a meio: pernas uma vez por semana, a 42% do volume mínimo eficaz. Com 4 ou 6 dias, pernas tinham duas sessões.</dd>
+      <dt>Correção</dt><dd>Uma tabela explícita por número de dias, mais uma regra testada de 1 a 7 dias: todo o grupo muscular grande é treinado pelo menos duas vezes por semana quando possível.</dd>
+      <dt>Lição</dt><dd>Um aviso que trata igual uma falta de 8% e uma de 58% é ruído, não é aviso.</dd>
+    </dl>
+  </article>
+
+  <article class="finding">
+    <h4><span data-l="en">A feature that existed only on paper</span><span data-l="pt">Uma funcionalidade que só existia no papel</span></h4>
+    <dl data-l="en">
+      <dt>Symptom</dt><dd>None. Documents described continuous learning as working.</dd>
+      <dt>Reality</dt><dd>The table of learned limits was read, but nothing ever wrote to it. The code fell back to reasonable default values. Nothing failed.</dd>
+      <dt>Fix</dt><dd>Connected the writer and added audit records for every end of training week.</dd>
+      <dt>Lesson</dt><dd>A column is alive only when something writes to it — in the same vocabulary its readers use. Check the code, not the status document.</dd>
+    </dl>
+    <dl data-l="pt">
+      <dt>Sintoma</dt><dd>Nenhum. A documentação descrevia a aprendizagem contínua como funcional.</dd>
+      <dt>Realidade</dt><dd>A tabela de limites aprendidos era lida, mas nada escrevia nela. O código caía em valores por omissão razoáveis. Nada falhava.</dd>
+      <dt>Correção</dt><dd>Liguei quem escreve e acrescentei registos de auditoria em cada fim de semana de treino.</dd>
+      <dt>Lição</dt><dd>Uma coluna só está viva quando alguém escreve nela — no mesmo vocabulário de quem a lê. Verificar o código, não o documento de estado.</dd>
+    </dl>
+  </article>
+
+  <h3><span data-l="en">Status, honestly</span><span data-l="pt">Estado, com honestidade</span></h3>
+  <p>
+    <span data-l="en">Live, and now being opened to its first testers. The adaptive loop is connected and tested, but it needs four weeks of real training data before it runs for the first time. I document what is verified separately from what is only implemented.</span>
+    <span data-l="pt">Em produção e a abrir agora aos primeiros testadores. O ciclo adaptativo está ligado e testado, mas precisa de quatro semanas de treino real antes de correr pela primeira vez. Documento separadamente o que está verificado e o que está apenas implementado.</span>
+  </p>
+  <p class="meta">Next.js · React · TypeScript · PostgreSQL / Supabase · Vitest · Sentry · Vercel · Anthropic API</p>
+  <div class="links"><a href="https://alkmia.app">alkmia.app</a></div>
+</section>
+
+<section id="principles">
+  <h2><span data-l="en">How I work</span><span data-l="pt">Como trabalho</span></h2>
+  <ul class="rules" data-l="en">
+    <li><b>Diagnose before fixing.</b> Read the real error message before changing anything.</li>
+    <li><b>Check the object, not the log.</b> To know what the database has, query the database.</li>
+    <li><b>Never swallow an error.</b> A hidden error is paid for later, in hours.</li>
+    <li><b>Implemented is not verified.</b> Every status claim says how it was checked.</li>
+  </ul>
+  <ul class="rules" data-l="pt">
+    <li><b>Diagnóstico antes da correção.</b> Ler a mensagem de erro real antes de mudar seja o que for.</li>
+    <li><b>Verificar o objeto, não o registo.</b> Para saber o que a base de dados tem, pergunta-se à base de dados.</li>
+    <li><b>Nunca engolir um erro.</b> Um erro escondido paga-se depois, em horas.</li>
+    <li><b>Implementado não é verificado.</b> Cada afirmação de estado diz como foi verificada.</li>
+  </ul>
+</section>
+
+<section id="projects">
+  <h2><span data-l="en">Other projects</span><span data-l="pt">Outros projetos</span></h2>
+
+  <div class="proj">
+    <h3><span data-l="en">Task Manager</span><span data-l="pt">Gerenciador de Tarefas</span></h3>
+    <p class="meta"><span data-l="en">Public code. Desktop app, now moving to the web.</span><span data-l="pt">Código público. App de secretária, agora a passar para a web.</span></p>
+    <div data-l="en">
+      <p>A modular desktop app with a plugin system, built with the Python standard library only — no runtime dependencies. Windows installer released. PDF and Excel reports are written by hand; tests read them back to prove they are valid. A self-test opens the app through the same path as a real double-click.</p>
+      <p>The web version is multi-tenant, with Next.js, Supabase and row-level security. An AI copilot reads with the user's own permissions and never writes: it proposes, the person applies. Decisions are recorded in 25 architecture decision records.</p>
+    </div>
+    <div data-l="pt">
+      <p>Uma app de secretária modular com sistema de plugins, feita só com a biblioteca padrão de Python — sem dependências de execução. Instalador Windows publicado. Os relatórios PDF e Excel são escritos à mão; os testes leem-nos de volta para provar que são válidos. Um autoteste abre a app pelo mesmo caminho de um duplo-clique real.</p>
+      <p>A versão web é multiempresa, com Next.js, Supabase e row-level security. Um copiloto de IA lê com as permissões do próprio utilizador e nunca escreve: propõe, e a pessoa aplica. As decisões estão registadas em 25 registos de decisão de arquitetura.</p>
+    </div>
+    <div class="links">
+      <a href="https://github.com/Raoc1987/gerenciador_de_tarefas">GitHub</a>
+      <a href="https://github.com/Raoc1987/gerenciador_de_tarefas/tree/main/docs/architecture"><span data-l="en">Architecture decisions</span><span data-l="pt">Decisões de arquitetura</span></a>
+      <a href="https://github.com/Raoc1987/gerenciador_de_tarefas/releases">Releases</a>
+    </div>
+  </div>
+
+  <div class="proj">
+    <h3>Workout Insights &amp; Planner</h3>
+    <p class="meta"><span data-l="en">Public code. Python, pandas, Jupyter.</span><span data-l="pt">Código público. Python, pandas, Jupyter.</span></p>
+    <p><span data-l="en">Weekly training metrics, plateau detection and progression suggestions, with schema validation and a reproducible notebook. Earlier work, where my interest in training data started.</span><span data-l="pt">Métricas semanais de treino, deteção de estagnação e sugestões de progressão, com validação de schema e um notebook reprodutível. Trabalho anterior, onde começou o meu interesse por dados de treino.</span></p>
+    <div class="links">
+      <a href="https://github.com/Raoc1987/Workout-Insights-Planner">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2><span data-l="en">Skills</span><span data-l="pt">Competências</span></h2>
+  <dl class="stack">
+    <dt>Backend & data</dt><dd>PostgreSQL, row-level security, SQL migrations, transactional functions, Supabase</dd>
+    <dt>Frontend</dt><dd>Next.js (App Router), React, TypeScript, Tailwind CSS</dd>
+    <dt><span data-l="en">Testing</span><span data-l="pt">Testes</span></dt><dd>Vitest, property-based tests, integration tests on real migrations, pytest</dd>
+    <dt><span data-l="en">AI in products</span><span data-l="pt">IA em produtos</span></dt><dd><span data-l="en">Anthropic API, output validation, deterministic guardrails</span><span data-l="pt">Anthropic API, validação de respostas, regras determinísticas</span></dd>
+    <dt><span data-l="en">Operations</span><span data-l="pt">Operações</span></dt><dd>Vercel, Sentry, GitHub Actions, Git</dd>
+    <dt>Python</dt><dd>pandas, pydantic, Jupyter, Tkinter, SQLite</dd>
+    <dt><span data-l="en">Languages</span><span data-l="pt">Línguas</span></dt><dd><span data-l="en">Portuguese (native). English: basic (A1), learning actively.</span><span data-l="pt">Português (nativo). Inglês: básico (A1), em aprendizagem ativa.</span></dd>
+  </dl>
+</section>
+
+<section id="background">
+  <h2><span data-l="en">Background</span><span data-l="pt">Percurso</span></h2>
+  <ul class="timeline">
+    <li><span>2026 –</span><div data-l="en">Digital production of LED retail products — WD Retail, Portugal</div><div data-l="pt">Produção digital de produtos LED para retalho — WD Retail, Portugal</div></li>
+    <li><span><span data-l="en">Earlier</span><span data-l="pt">Antes</span></span><div data-l="en">Industry in Brazil and Portugal: ultrasonic quality inspection, injection moulding, textile spinning, warehouse</div><div data-l="pt">Indústria no Brasil e em Portugal: inspeção de qualidade por ultrassom, moldagem por injeção, fiação, armazém</div></li>
+    <li><span>2022 – 2024</span><div data-l="en">MSc Electromechanical Engineering, coursework (not completed) — Universidade da Beira Interior, Portugal</div><div data-l="pt">Mestrado em Engenharia Eletromecânica, frequência (não concluído) — Universidade da Beira Interior, Portugal</div></li>
+    <li><span>2015 – 2020</span><div data-l="en">BSc Mechanical Engineering — Centro Universitário UNA, Brazil</div><div data-l="pt">Licenciatura em Engenharia Mecânica — Centro Universitário UNA, Brasil</div></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <h2><span data-l="en">Contact</span><span data-l="pt">Contacto</span></h2>
+  <p><span data-l="en">Based in Portugal. Open to remote and on-site roles.</span><span data-l="pt">Em Portugal. Disponível para funções remotas e presenciais.</span></p>
+  <div class="contact">
+    <a class="primary" href="mailto:rodrigocosta8638@gmail.com"><span data-l="en">Send an email</span><span data-l="pt">Enviar email</span></a>
+    <a href="https://github.com/Raoc1987">GitHub</a>
+    <a href="https://www.linkedin.com/in/rodrigo-costa-105562b5/">LinkedIn</a>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('[data-set]');
+  function set(l){
+    root.setAttribute('data-lang',l); root.setAttribute('lang',l==='pt'?'pt':'en');
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l))});
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
+  var nav=(navigator.language||'').toLowerCase();
+  set(saved==='en'||saved==='pt'?saved:(nav.indexOf('pt')===0?'pt':'en'));
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+})();
+</script>
+</body>
+</html>
